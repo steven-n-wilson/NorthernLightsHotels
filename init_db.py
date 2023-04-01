@@ -788,11 +788,12 @@ conn.commit()
 # --3rd trigger for updating the rent table when the booking table is updated
 # --3rd Index
 # CREATE UNIQUE INDEX rent_booking_key ON rent(booking_id);
-# CREATE OR REPLACE FUNCTION update_rentals()
-# RETURNS TRIGGER AS $$
+# CREATE OR REPLACE FUNCTION update_rentals() RETURNS TRIGGER AS $$
 # BEGIN
-# 	INSERT OR UPDATE INTO rent(booking_id,room_number, rent_date, customer_id);
-# 	VALUES(NEW.booking_id,NEW.room_number,NEW.book_date,NEW.customer_id);
+# 	INSERT INTO rent(booking_id,room_number, rent_date, customer_id)
+# 	VALUES(NEW.booking_id,NEW.room_number,NEW.book_date,NEW.customer_id)
+# 	ON CONFLICT (booking_id, room_number) DO UPDATE
+# 	SET rent_date = EXCLUDED.rent_date, customer_id = EXCLUDED.customer_id;
 # 	RETURN NEW;
 # END;
 
