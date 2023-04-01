@@ -8,6 +8,8 @@
 
 ### How to deploy:
 
+** Install Flask and psycopg2
+
 * run Python file → init_db.py
 * run Python file → app.py
 
