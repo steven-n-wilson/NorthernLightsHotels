@@ -112,28 +112,22 @@ cur.execute('CREATE TABLE payment ( payment_id serial PRIMARY KEY,'
                                     ) 
 
 # -- 1st Trigger for manager_id
-
-# cur.execute("""
-#     CREATE OR REPLACE FUNCTION if_manager()
-#     RETURNS TRIGGER
-#     AS 
-#     $$
-#     BEGIN
-#         IF emp_role <> 'manager' THEN
-#             INSERT INTO employee(manager_id)
-#             VALUES (NEW.emp_id);
-#         END IF;
-#         RETURN NEW;
-#     END;
-#     $$ LANGUAGE plpgsql;
-# """)
-
-# cur.execute("""
-#     CREATE TRIGGER manager_event()
-#     AFTER UPDATE ON employee
-#     FOR EACH ROW
-#     EXECUTE FUNCTION if_manager();
-# """);
+# CREATE OR REPLACE FUNCTION if_manager()
+# 	RETURNS TRIGGER
+# 	AS 
+# $$
+# BEGIN
+# 	IF emp_role <> 'manager' THEN
+# 		INSERT INTO employee(manager_id)
+# 		VALUES (NEW.emp_id);
+# 	END IF;
+# 	RETURN NEW;
+# END;
+# $$ LANGUAGE plpgsql;
+# CREATE TRIGGER manager_event
+# AFTER UPDATE ON employee
+# FOR EACH ROW
+# EXECUTE FUNCTION if_manager();
 
 
 # Insert data into the table
@@ -717,57 +711,71 @@ execute_values(cur,
 conn.commit()
 
 # # -- These are the 4 required queries + 1 needed for running the UI
-# SELECT hotel_id,owner_name,star_rating, country
-# FROM hotel_addresses,hotel
-# WHERE star_rating >= 4 AND country = 'Canada';
 
-# SELECT hotel_id,owner_name,room_number, price
-# FROM room, hotel
-# WHERE price =< 200;
+# query1 = """SELECT hotel.hotel_id, hotel.owner_name, star_rating, country 
+#             FROM hotel_addresses, hotel 
+#             WHERE star_rating >= 4 AND country = 'Canada' 
+#             AND hotel.hotel_id = hotel_addresses.hotel_id"""
+# cur.execute(query1)
+# results1 = cur.fetchall()
 
-# SELECT hotel_id, room_number, outdoor_view
-# FROM room
-# WHERE outdoor_view = 'Mountain';
+# query2 = """SELECT room.hotel_id, hotel.owner_name, room.room_number, room.price 
+#             FROM room 
+#             INNER JOIN hotel 
+#             ON room.hotel_id = hotel.hotel_id 
+#             WHERE price <= 200"""
+# cur.execute(query2)
+# results2 = cur.fetchall()
 
-# SELECT hotel_id, owner_name, problems
-# FROM room, hotel
-# WHERE problems = "{'none'}" AND owner_name = 'Goodnite Hostels';
+# query3 = """SELECT hotel_id, room_number, outdoor_view 
+#             FROM room 
+#             WHERE outdoor_view = 'Mountain'"""
+# cur.execute(query3)
+# results3 = cur.fetchall()
 
-# SELECT rent_date, check_out_date,capacity,country,price,owner_name,star_rating,number_of_rooms
-# FROM check_in, hotel, hotel_addresses,room;
+# query4 = """SELECT room.hotel_id, room.room_number, hotel.owner_name, room.problems 
+#             FROM room 
+#             INNER JOIN hotel 
+#             ON room.hotel_id = hotel.hotel_id 
+#             WHERE problems = '{"none"}' AND owner_name = 'Goodnite Hostels'"""
+# cur.execute(query4)
+# results4 = cur.fetchall()
 
-# # -- The 2 required views
-# CREATE VIEW rooms_in_usa AS
-# 	SELECT 
-# 		COUNT(DISTINCT room_id)
-# 	FROM room,hotel_addresses
-# 	WHERE
-# 		COUNT (country) = 'USA' AND isAvailable = 'yes'
-# 	GROUP BY
-# 		country;
+# query5 = """SELECT check_in.rent_date, check_in.check_out_date, room.capacity, hotel_addresses.country, 
+#             room.price, hotel.owner_name, hotel.star_rating, hotel.number_of_rooms 
+#             FROM check_in 
+#             INNER JOIN room 
+#             ON check_in.room_number = room.room_number AND check_in.hotel_id = room.hotel_id 
+#             INNER JOIN hotel 
+#             ON room.hotel_id = hotel.hotel_id 
+#             INNER JOIN hotel_addresses 
+#             ON hotel.hotel_id = hotel_addresses.hotel_id"""
+# cur.execute(query5)
+# results5 = cur.fetchall()
 
 # CREATE VIEW rooms_in_canada AS
 # 	SELECT 
 # 		COUNT(DISTINCT room_id)
 # 	FROM room,hotel_addresses
 # 	WHERE
-# 		COUNT (country) = 'Canada' AND isAvailable = 'yes'
-# 	GROUP BY
-# 		country;
+# 		country = 'Canada' AND isAvailable = 'yes';
+# 	--GROUP BY
+# 		--country;
 
 # CREATE VIEW capacity_in_rooms AS
 # 	SELECT hotel_id,room_number,capacity
 # 	FROM room;
 
-# CREATE INDEX price_rating_hotel_room_availability(price,star_rating,isAvailable);
+# CREATE INDEX hotel_rating ON hotel(star_rating);
+# CREATE INDEX price_hotel_room_availability ON room(isAvailable) INCLUDE (price);
 
-# CREATE INDEX customer_booking(customer_id,booking_id);
+# CREATE UNIQUE INDEX customer_booking ON booking(customer_id,booking_id);
 
-# # --2nd trigger to change room availability after booking
+# --2nd trigger to change room availability after booking
 # CREATE OR REPLACE FUNCTION change_availability() RETURNS TRIGGER AS $$
 # BEGIN
 # 	IF NEW.room_id <> NULL AND NEW.customer_id <> NULL THEN
-# 		UPDATE room SET isAvailable = 'no'
+# 		UPDATE room SET isAvailable = 'no';
 # 	END IF;
 # 	RETURN NEW;
 # END;
@@ -775,16 +783,16 @@ conn.commit()
 # CREATE TRIGGER unavailable
 # AFTER INSERT OR UPDATE ON booking
 # FOR EACH ROW
-# EXECUTE change_availability();
+# EXECUTE FUNCTION change_availability();
 
-# # --3rd trigger for updating the rent table when the booking table is updated
-# # --3rd Index
+# --3rd trigger for updating the rent table when the booking table is updated
+# --3rd Index
 # CREATE UNIQUE INDEX rent_booking_key ON rent(booking_id);
 # CREATE OR REPLACE FUNCTION update_rentals()
 # RETURNS TRIGGER AS $$
 # BEGIN
-# 	INSERT OR UPDATE INTO rent(booking_id,room_number, rent_date, customer_id)
-# 	VALUES(NEW.booking_id,NEW.room_number,NEW.book_date,NEW.customer_id)
+# 	INSERT OR UPDATE INTO rent(booking_id,room_number, rent_date, customer_id);
+# 	VALUES(NEW.booking_id,NEW.room_number,NEW.book_date,NEW.customer_id);
 # 	RETURN NEW;
 # END;
 
@@ -794,7 +802,6 @@ conn.commit()
 # AFTER INSERT OR UPDATE ON booking
 # FOR EACH ROW 
 # EXECUTE FUNCTION update_rentals();
-
 
 cur.close()
 conn.close()
