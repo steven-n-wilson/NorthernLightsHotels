@@ -92,57 +92,57 @@
                 <div class="block-32" data-aos="fade-up" data-aos-offset="-200">
 
                     <div class="row">
-                        <div class="col-md-6 mb-2 mb-lg-0 col-lg-2">
+                        <div class="col-md-3">
                             <p class="font-weight-bold text-black">Room Number</p>
                         </div>
                         
-                        <div class="col-md-6 mb-2 mb-lg-0 col-lg-2">
+                        <div class="col-md-3">
                             <p class="font-weight-bold text-black">Room Capacity</p>
                         </div>
 
-                        <div class="col-md-6 mb-2 mb-lg-0 col-lg-2">
+                        <div class="col-md-3">
                             <p class="font-weight-bold text-black">Outdoor View</p>
                         </div>
 
-                        <div class="col-md-6 mb-2 mb-lg-0 col-lg-2">
+                        <div class="col-md-3">
                             <p class="font-weight-bold text-black">Price</p>  
                         </div>
 
-                        <div class="col-md-6 mb-2 mb-lg-0 col-lg-2">
+                        <!-- <div class="col-md-6 mb-2 mb-lg-0 col-lg-2">
                             <p class="font-weight-bold text-black">EXTRA 1</p>                          
                         </div>
 
                         <div class="col-md-6 mb-2 mb-lg-0 col-lg-2">
                             <p class="font-weight-bold text-black">EXTRA 2</p>   
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="row"> 
                         {% for result in results %}
 
-                        <div class="col-md-6 mb-2 mb-lg-0 col-lg-2">
+                        <div class="col-md-3">
                             <p class="text-black">{{ result.room_number }}</p>
                         </div>
                         
-                        <div class="col-md-6 mb-2 mb-lg-0 col-lg-2">
+                        <div class="col-md-3">
                             <p class="text-black">{{ result.room_capacity }}</p>
                         </div>
 
-                        <div class="col-md-6 mb-2 mb-lg-0 col-lg-2">
+                        <div class="col-md-3">
                             <p class="text-black">{{ result.outdoor_view }}</p>
                         </div>
 
-                        <div class="col-md-6 mb-2 mb-lg-0 col-lg-2">
+                        <div class="col-md-3">
                             <p class="text-black">{{ result.price }}</p>  
                         </div>
 
-                        <div class="col-md-6 mb-2 mb-lg-0 col-lg-2">
+                        <!-- <div class="col-md-6 mb-2 mb-lg-0 col-lg-2">
                             <p class="text-black">EXTRA 1</p>                          
                         </div>
 
                         <div class="col-md-6 mb-2 mb-lg-0 col-lg-2">
                             <p class="text-black">EXTRA 2</p>   
-                        </div>
+                        </div> -->
                         {% endfor %}
 
                     </div>

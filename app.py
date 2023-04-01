@@ -308,7 +308,7 @@ def search():
     area = request.args.get('area')
     price = request.args.get('price')
     reservation_type = request.args.get('reservation_type')
-    hotel_chain = request.args.get('hotel_chain')
+    hotel_chain = "'" + request.args.get('hotel_chain')+ "'"
     category = request.args.get('category')
     hotel_capacity = request.args.get('hotel_capacity')
     
@@ -317,7 +317,15 @@ def search():
     conn = get_db_connection()
     cur = conn.cursor()
 
-    cur.execute(f"SELECT * FROM room WHERE price <= {price} AND capacity = {guest_capacity}")
+    cur.execute(f""" 
+        SELECT h.hotel_id, h.owner_name, h.star_rating, h.number_of_rooms, r.room_number, r.price, r.capacity
+        FROM hotel h
+        JOIN room r ON h.hotel_id = r.hotel_id
+        WHERE h.owner_name = {hotel_chain} AND h.star_rating <= {category} AND h.number_of_rooms >= {hotel_capacity} 
+        AND r.price <= {price} AND r.capacity >= {guest_capacity}
+    """)
+
+    # cur.execute(f"SELECT * FROM room WHERE price <= {price} AND capacity = {guest_capacity}")
 
     # Fetch the results and return them as a list of dictionaries
     results = []
@@ -347,13 +355,13 @@ def employee_admin():
         amount = request.form['amount']
 
         # SQL query to insert data to flask_db
-        # conn = get_db_connection()
-        # cur = conn.cursor()
+        conn = get_db_connection()
+        cur = conn.cursor()
         # cur.execute(f"INSERT INTO payment (card_name, card_number, expiry, password, amount) VALUES ({card_name}, {card_number}, {expiry}, {password}, {amount})")
 
-        # conn.commit()
-        # cur.close()
-        # conn.close()
+        conn.commit()
+        cur.close()
+        conn.close()
 
         return redirect('/employee_admin')
         

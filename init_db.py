@@ -13,7 +13,7 @@ conn = psycopg2.connect(
 # Open a cursor to perform database operations
 cur = conn.cursor()
 
-# Execute a command: this create the tables
+# create the tables
 
 cur.execute('DROP TABLE IF EXISTS hotel_chain;')
 cur.execute('CREATE TABLE hotel_chain ( name varchar(40) PRIMARY KEY,'
@@ -111,21 +111,29 @@ cur.execute('CREATE TABLE payment ( payment_id serial PRIMARY KEY,'
                                     'amount int NOT NULL);'
                                     ) 
 
-
 # -- 1st Trigger for manager_id
+
 # cur.execute("""
-# CREATE OR REPLACE FUNCTION if_manager()
-# RETURNS TRIGGER AS
-# $$
-# BEGIN
-#     IF emp_role = 'manager'
-#         INSERT INTO employee(manager_id)
-#         VALUES (NEW.manager_id);
-#     END IF;
-#     RETURN NEW;
-# END;
-# $$ 
+#     CREATE OR REPLACE FUNCTION if_manager()
+#     RETURNS TRIGGER
+#     AS 
+#     $$
+#     BEGIN
+#         IF emp_role <> 'manager' THEN
+#             INSERT INTO employee(manager_id)
+#             VALUES (NEW.emp_id);
+#         END IF;
+#         RETURN NEW;
+#     END;
+#     $$ LANGUAGE plpgsql;
 # """)
+
+# cur.execute("""
+#     CREATE TRIGGER manager_event()
+#     AFTER UPDATE ON employee
+#     FOR EACH ROW
+#     EXECUTE FUNCTION if_manager();
+# """);
 
 
 # Insert data into the table
@@ -707,6 +715,86 @@ execute_values(cur,
 	(2412724,300,7,'no','forest',300,'{"none"}','{"Shower","TV","Internet","Free towels","Free pancakes","sauna","room service"}','yes')])
 
 conn.commit()
+
+# # -- These are the 4 required queries + 1 needed for running the UI
+# SELECT hotel_id,owner_name,star_rating, country
+# FROM hotel_addresses,hotel
+# WHERE star_rating >= 4 AND country = 'Canada';
+
+# SELECT hotel_id,owner_name,room_number, price
+# FROM room, hotel
+# WHERE price =< 200;
+
+# SELECT hotel_id, room_number, outdoor_view
+# FROM room
+# WHERE outdoor_view = 'Mountain';
+
+# SELECT hotel_id, owner_name, problems
+# FROM room, hotel
+# WHERE problems = "{'none'}" AND owner_name = 'Goodnite Hostels';
+
+# SELECT rent_date, check_out_date,capacity,country,price,owner_name,star_rating,number_of_rooms
+# FROM check_in, hotel, hotel_addresses,room;
+
+# # -- The 2 required views
+# CREATE VIEW rooms_in_usa AS
+# 	SELECT 
+# 		COUNT(DISTINCT room_id)
+# 	FROM room,hotel_addresses
+# 	WHERE
+# 		COUNT (country) = 'USA' AND isAvailable = 'yes'
+# 	GROUP BY
+# 		country;
+
+# CREATE VIEW rooms_in_canada AS
+# 	SELECT 
+# 		COUNT(DISTINCT room_id)
+# 	FROM room,hotel_addresses
+# 	WHERE
+# 		COUNT (country) = 'Canada' AND isAvailable = 'yes'
+# 	GROUP BY
+# 		country;
+
+# CREATE VIEW capacity_in_rooms AS
+# 	SELECT hotel_id,room_number,capacity
+# 	FROM room;
+
+# CREATE INDEX price_rating_hotel_room_availability(price,star_rating,isAvailable);
+
+# CREATE INDEX customer_booking(customer_id,booking_id);
+
+# # --2nd trigger to change room availability after booking
+# CREATE OR REPLACE FUNCTION change_availability() RETURNS TRIGGER AS $$
+# BEGIN
+# 	IF NEW.room_id <> NULL AND NEW.customer_id <> NULL THEN
+# 		UPDATE room SET isAvailable = 'no'
+# 	END IF;
+# 	RETURN NEW;
+# END;
+# $$ LANGUAGE plpgsql;
+# CREATE TRIGGER unavailable
+# AFTER INSERT OR UPDATE ON booking
+# FOR EACH ROW
+# EXECUTE change_availability();
+
+# # --3rd trigger for updating the rent table when the booking table is updated
+# # --3rd Index
+# CREATE UNIQUE INDEX rent_booking_key ON rent(booking_id);
+# CREATE OR REPLACE FUNCTION update_rentals()
+# RETURNS TRIGGER AS $$
+# BEGIN
+# 	INSERT OR UPDATE INTO rent(booking_id,room_number, rent_date, customer_id)
+# 	VALUES(NEW.booking_id,NEW.room_number,NEW.book_date,NEW.customer_id)
+# 	RETURN NEW;
+# END;
+
+# $$ LANGUAGE plpgsql;
+
+# CREATE TRIGGER book_to_rent
+# AFTER INSERT OR UPDATE ON booking
+# FOR EACH ROW 
+# EXECUTE FUNCTION update_rentals();
+
 
 cur.close()
 conn.close()
