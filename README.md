@@ -8,7 +8,7 @@
 
 ### How to deploy:
 
-** Create a postgres database named: flask_db
+** Create a postgres database named: flask_db<br />
 ** Install Flask and psycopg2
 
 * run Python file → init_db.py
