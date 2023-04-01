@@ -6,9 +6,9 @@
 ### Features:
 
 
-### Steps to deploy:
+### How to deploy:
 
-1. run Python file → init_db.py
-2. run Python file → app.py
+* run Python file → init_db.py
+* run Python file → app.py
 
-Open http://127.0.0.1:3000 with your browser to see the result.
+Open http://127.0.0.1:3000 in browser.
