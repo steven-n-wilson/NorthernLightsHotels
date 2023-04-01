@@ -1,0 +1,690 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Northern Lights Hotels</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=|Roboto+Sans:400,700|Playfair+Display:400,700">
+
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/animate.css">
+    <link rel="stylesheet" href="static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="static/css/aos.css">
+    <link rel="stylesheet" href="static/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="static/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="static/css/fancybox.min.css">
+    
+    <link rel="stylesheet" href="static/fonts/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="static/fonts/fontawesome/css/font-awesome.min.css">
+
+    <!-- Theme Style -->
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/_custom.css">
+  </head>
+  <body>
+    
+    <header class="site-header js-site-header">
+      <div class="container-fluid">
+        <div class="row align-items-center">
+          <div class="col-6 col-lg-4 site-logo" data-aos="fade"><a href="/">Northern Lights Hotels</a></div>
+          <div class="col-6 col-lg-8">
+
+
+            <div class="site-menu-toggle js-site-menu-toggle"  data-aos="fade">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <!-- END menu-toggle -->
+
+            <div class="site-navbar js-site-navbar">
+              <nav role="navigation">
+                <div class="container">
+                  <div class="row full-height align-items-center">
+                    <div class="col-md-6 mx-auto">
+                      <ul class="list-unstyled menu">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/employee_admin">Employee Admin</a></li>
+                        <li class="active"><a href="/admin">Admin</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- END head -->
+
+    <section class="site-hero inner-page overlay" style="background-image: url(static/images/northern_lights.jpg)" data-stellar-background-ratio="0.5">
+      <div class="container">
+        <div class="row site-hero-inner justify-content-center align-items-center">
+          <div class="col-md-10 text-center" data-aos="fade">
+            <h1 class="heading mb-3">Administration</h1>
+            <ul class="custom-breadcrumbs mb-4">
+              <li><a href="/">Home</a></li>
+              <li>&bullet;</li>
+              <li>Northern Lights Management</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </section>
+    <!-- END section -->
+
+    <section class="section bg-light pb-0 contact-section">
+        <div class="container">
+
+            <div class="row check-availabilty" id="next">
+                <div class="block-32 admin-box">
+
+                  <br>
+                  <h2 class="heading">Room Data</h2>
+                  <br>
+
+                  <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+
+                    <br>
+                    <h3 class="font-weight-bold">Insert Room</h3>
+                    <br>
+
+                    <div class="row">
+                      <div class="col-md-4 form-group">
+                        <label class="text-black font-weight-bold" for="phone">Hotel ID</label>
+                        <input name="hotel_id" type="number" id="hotel_id" class="form-control" required>
+                      </div>
+                      <div class="col-md-4 form-group">
+                        <label class="text-black font-weight-bold" for="phone">Room Number</label>
+                        <input name="room_number" type="number" id="room_number" class="form-control" required>
+                      </div>
+                      <div class="col-md-4 form-group">
+                        <label class="text-black font-weight-bold" for="phone">Is Available</label>
+                        <select name="isAvailable" id="isAvailable" class="form-control" required>
+                          <option value=""></option>
+                          <option value="true">True</option>
+                          <option value="false">False</option>
+                        </select>                      
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-4 form-group">
+                        <label class="text-black font-weight-bold" for="name">Capacity</label>
+                        <input name="capacity" type="number" id="capacity" class="form-control ">
+                      </div>
+                      <div class="col-md-4 form-group">
+                        <label class="text-black font-weight-bold" for="phone">Is Extendable</label>
+                        <select name="isextendable" id="isextendable" class="form-control" required>
+                          <option value=""></option>
+                          <option value="true">True</option>
+                          <option value="false">False</option>
+                        </select>
+                      </div>
+                      <div class="col-md-4 form-group">
+                        <label class="text-black font-weight-bold" for="phone">Outdoor View</label>
+                        <input name="outdoor_view" type="text" id="outdoor_view" class="form-control " required>
+                      </div>
+                    </div>
+                   
+                    <div class="row">
+                      <div class="col-md-4 form-group">
+                        <label class="text-black font-weight-bold" for="name">Price</label>
+                        <input name="price" type="number" id="price" class="form-control " required>
+                      </div>
+                      <div class="col-md-4 form-group">
+                        <label class="text-black font-weight-bold" for="phone">Problems</label>
+                        <input name="problems" type="text" id="problems" class="form-control " required>
+                      </div>
+                      <div class="col-md-4 form-group">
+                        <label class="text-black font-weight-bold" for="phone">Amenities</label>
+                        <input name="amenities" type="text" id="amenities" class="form-control " required>
+                      </div>
+                    </div>
+      
+                    <div class="row">
+                      <div class="col-md-6 form-group">
+                        <input name="form1" type="submit" value="Insert" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+                      </div>
+                    </div>
+                  </form>
+
+
+                  <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+
+                    <br>
+                    <h3 class="font-weight-bold">Update Room Data</h3>
+                    <br>
+
+                    <div class="row">
+                      <div class="col-md-4 form-group">
+                        <label class="text-black font-weight-bold" for="phone">Room ID</label>
+                        <input name="room_id" type="number" id="room_id" class="form-control" required>
+                      </div>
+                      <div class="col-md-4 form-group">
+                        <label class="text-black font-weight-bold" for="phone">New Hotel ID</label>
+                        <input name="new_hotel_id" type="number" id="hotel_id" class="form-control" required>
+                      </div>
+                      <div class="col-md-4 form-group">
+                        <label class="text-black font-weight-bold" for="phone">New Is Available</label>
+                        <select name="new_isAvailable" id="new_isAvailable" class="form-control" required>
+                          <option value=""></option>
+                          <option value="true">True</option>
+                          <option value="false">False</option>
+                        </select>                      
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-3 form-group">
+                        <label class="text-black font-weight-bold" for="phone">New Room Number</label>
+                        <input name="new_room_number" type="number" id="room_number" class="form-control" required>
+                      </div>
+                      <div class="col-md-3 form-group">
+                        <label class="text-black font-weight-bold" for="name">New Capacity</label>
+                        <input name="new_capacity" type="number" id="capacity" class="form-control ">
+                      </div>
+                      <div class="col-md-3 form-group">
+                        <label class="text-black font-weight-bold" for="phone">New Is Extendable</label>
+                        <select name="new_isextendable" id="isextendable" class="form-control" required>
+                          <option value=""></option>
+                          <option value="true">True</option>
+                          <option value="false">False</option>
+                        </select>
+                      </div>
+                      <div class="col-md-3 form-group">
+                        <label class="text-black font-weight-bold" for="phone">New Outdoor View</label>
+                        <input name="new_outdoor_view" type="text" id="outdoor_view" class="form-control " required>
+                      </div>
+                    </div>
+                   
+                    <div class="row">
+                      <div class="col-md-4 form-group">
+                        <label class="text-black font-weight-bold" for="phone">New Price</label>
+                        <input name="new_price" type="number" id="new_price" class="form-control" required>
+                      </div>
+                      <div class="col-md-4 form-group">
+                        <label class="text-black font-weight-bold" for="phone">New Problems</label>
+                        <input name="new_problems" type="text" id="problems" class="form-control " required>
+                      </div>
+                      <div class="col-md-4 form-group">
+                        <label class="text-black font-weight-bold" for="phone">New Amenities</label>
+                        <input name="new_amenities" type="text" id="amenities" class="form-control " required>
+                      </div>
+                    </div>
+
+      
+                    <div class="row">
+                      <div class="col-md-6 form-group">
+                        <input name="form2" type="submit" value="Update" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+                      </div>
+                    </div>
+                  </form>
+
+                  <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+
+                    <br>
+                    <h3 class="font-weight-bold">Delete Room</h3>
+                    <br>
+
+                    <div class="row">
+                      <div class="col-md-6 form-group">
+                        <label class="text-black font-weight-bold" for="phone">Room ID</label>
+                        <input name="room_id" type="number" id="room_id" class="form-control" required>
+                      </div>
+                    </div>
+      
+                    <div class="row">
+                      <div class="col-md-6 form-group">
+                        <input name="form3" type="submit" value="Delete" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+                      </div>
+                    </div>
+                  </form>
+                    
+            </div>
+          </div>
+
+          <div class="row check-availabilty second-admin-box">
+            <div class="block-32 admin-box">
+
+              <br>
+              <h2 class="heading">Hotel Data</h2>
+              <br>
+
+              <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+
+                <br>
+                <h3 class="font-weight-bold">Insert Hotel</h3>
+                <br>
+
+                <div class="row">
+                  <div class="col-md-4 form-group">
+                    <label class="text-black font-weight-bold" for="phone">Hotel ID</label>
+                    <input name="hotel_id" type="number" id="hotel_id" class="form-control" required>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label class="text-black font-weight-bold" for="phone">Owner Name</label>
+                    <input name="owner_name" type="text" id="owner_name" class="form-control" required>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label class="text-black font-weight-bold" for="name">Star Rating</label>
+                    <input name="star_rating" type="number" id="star_rating" class="form-control ">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4 form-group">
+                    <label class="text-black font-weight-bold" for="phone">Number of Rooms</label>
+                    <input name="number_of_rooms" type="number" id="number_of_rooms" class="form-control ">
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label class="text-black font-weight-bold" for="phone">Phone Number</label>
+                    <input name="phone_number" type="text" id="phone_number" class="form-control " required>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label class="text-black font-weight-bold" for="name">Email Address</label>
+                    <input name="email_address" type="email" id="email_address" class="form-control " required>
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <input name="form4" type="submit" value="Insert" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+                  </div>
+                </div>
+              </form>
+
+
+              <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+
+                <br>
+                <h3 class="font-weight-bold">Update Hotel Data</h3>
+                <br>
+
+                <div class="row">
+                  <div class="col-md-4 form-group">
+                    <label class="text-black font-weight-bold" for="phone">Hotel ID</label>
+                    <input name="hotel_id" type="number" id="hotel_id" class="form-control" required>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label class="text-black font-weight-bold" for="phone">New Owner Name</label>
+                    <input name="new_owner_name" type="text" id="new_owner_name" class="form-control" required>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label class="text-black font-weight-bold" for="name">New Star Rating</label>
+                    <input name="new_star_rating" type="number" id="new_star_rating" class="form-control ">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4 form-group">
+                    <label class="text-black font-weight-bold" for="phone">New Number of Rooms</label>
+                    <input name="new_number_of_rooms" type="number" id="new_number_of_rooms" class="form-control ">
+                    </select>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label class="text-black font-weight-bold" for="phone">New Phone Number</label>
+                    <input name="new_phone_number" type="text" id="new_phone_number" class="form-control " required>
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label class="text-black font-weight-bold" for="name">New Email Address</label>
+                    <input name="new_email_address" type="email" id="new_email_address" class="form-control " required>
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <input name="form5" type="submit" value="Insert" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+                  </div>
+                </div>
+              </form>
+
+              <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+
+                <br>
+                <h3 class="font-weight-bold">Delete Hotel</h3>
+                <br>
+
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <label class="text-black font-weight-bold" for="phone">Hotel ID</label>
+                    <input name="hotel_id" type="number" id="hotel_id" class="form-control" required>
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <input name="form6" type="submit" value="Delete" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+                  </div>
+                </div>
+              </form>
+                
+        </div>
+      </div>
+
+
+      <div class="row check-availabilty second-admin-box">
+        <div class="block-32 admin-box">
+
+          <br>
+          <h2 class="heading">Employee Data</h2>
+          <br>
+
+          <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+
+            <br>
+            <h3 class="font-weight-bold">Insert Employee</h3>
+            <br>
+
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <label class="text-black font-weight-bold" for="phone">First Name</label>
+                <input name="first_name" type="text" id="first_name" class="form-control" required>
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="text-black font-weight-bold" for="phone">Last Name</label>
+                <input name="last_name" type="text" id="last_name" class="form-control" required>
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="text-black font-weight-bold" for="name">Employee Role</label>
+                <input name="emp_role" type="text" id="emp_role" class="form-control ">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <label class="text-black font-weight-bold" for="phone">Hotel ID</label>
+                <input name="hotel_id" type="number" id="hotel_id" class="form-control ">
+                </select>
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="text-black font-weight-bold" for="phone">Street</label>
+                <input name="street" type="text" id="street" class="form-control " required>
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="text-black font-weight-bold" for="name">City</label>
+                <input name="city" type="text" id="city" class="form-control " required>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label class="text-black font-weight-bold" for="phone">State or Province</label>
+                <input name="state_or_province" type="text" id="state_or_province" class="form-control ">
+                </select>
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="text-black font-weight-bold" for="phone">Postal Code</label>
+                <input name="postal_code" type="text" id="postal_code" class="form-control " required>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <input name="form7" type="submit" value="Insert" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+              </div>
+            </div>
+          </form>
+
+
+          <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+
+            <br>
+            <h3 class="font-weight-bold">Update Employee Data</h3>
+            <br>
+
+            <div class="row">
+              <div class="col-md-3 form-group">
+                <label class="text-black font-weight-bold" for="phone">Employee ID</label>
+                <input name="emp_id" type="text" id="emp_id" class="form-control" required>
+              </div>
+              <div class="col-md-3 form-group">
+                <label class="text-black font-weight-bold" for="phone">New First Name</label>
+                <input name="new_first_name" type="text" id="new_first_name" class="form-control" required>
+              </div>
+              <div class="col-md-3 form-group">
+                <label class="text-black font-weight-bold" for="phone">New Last Name</label>
+                <input name="new_last_name" type="text" id="new_last_name" class="form-control" required>
+              </div>
+              <div class="col-md-3 form-group">
+                <label class="text-black font-weight-bold" for="name">New Employee Role</label>
+                <input name="new_emp_role" type="text" id="new_emp_role" class="form-control ">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <label class="text-black font-weight-bold" for="phone">New Hotel ID</label>
+                <input name="new_hotel_id" type="number" id="new_hotel_id" class="form-control ">
+                </select>
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="text-black font-weight-bold" for="phone">New Street</label>
+                <input name="new_street" type="text" id="new_street" class="form-control " required>
+              </div>
+              <div class="col-md-4 form-group">
+                <label class="text-black font-weight-bold" for="name">New City</label>
+                <input name="new_city" type="text" id="new_city" class="form-control " required>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label class="text-black font-weight-bold" for="phone">New State or Province</label>
+                <input name="new_state_or_province" type="text" id="new_state_or_province" class="form-control ">
+                </select>
+              </div>
+              <div class="col-md-6 form-group">
+                <label class="text-black font-weight-bold" for="phone">New Postal Code</label>
+                <input name="new_postal_code" type="text" id="new_postal_code" class="form-control " required>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <input name="form8" type="submit" value="Update" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+              </div>
+            </div>
+          </form>
+
+          <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+
+            <br>
+            <h3 class="font-weight-bold">Delete Employee</h3>
+            <br>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label class="text-black font-weight-bold" for="phone">Employee ID</label>
+                <input name="emp_id" type="number" id="emp_id" class="form-control" required>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <input name="form9" type="submit" value="Delete" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+              </div>
+            </div>
+          </form>     
+      </div>
+    </div>
+  
+    <div class="row check-availabilty second-admin-box">
+      <div class="block-32 admin-box">
+
+        <br>
+        <h2 class="heading">Customer Data</h2>
+        <br>
+
+        <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+
+          <br>
+          <h3 class="font-weight-bold">Insert Customer</h3>
+          <br>
+
+          <div class="row">
+            <div class="col-md-4 form-group">
+              <label class="text-black font-weight-bold" for="name">Customer ID</label>
+              <input name="customer_id" type="number" id="customer_id" class="form-control ">
+            </div>
+            <div class="col-md-4 form-group">
+              <label class="text-black font-weight-bold" for="phone">First Name</label>
+              <input name="first_name" type="text" id="first_name" class="form-control" required>
+            </div>
+            <div class="col-md-4 form-group">
+              <label class="text-black font-weight-bold" for="phone">Last Name</label>
+              <input name="last_name" type="text" id="last_name" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label class="text-black font-weight-bold" for="phone">Customer Address</label>
+              <input name="customer_address" type="text" id="customer_address" class="form-control ">
+              </select>
+            </div>
+            <div class="col-md-6 form-group">
+              <label class="text-black font-weight-bold" for="phone">Date of Registration</label>
+              <input name="date_of_registration" type="text" id="date_of_registration" class="form-control " required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <input name="form10" type="submit" value="Insert" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+            </div>
+          </div>
+        </form>
+
+
+        <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+
+          <br>
+          <h3 class="font-weight-bold">Update Customer Data</h3>
+          <br>
+
+          <div class="row">
+            <div class="col-md-4 form-group">
+              <label class="text-black font-weight-bold" for="name">Customer ID</label>
+              <input name="customer_id" type="number" id="customer_id" class="form-control ">
+            </div>
+            <div class="col-md-4 form-group">
+              <label class="text-black font-weight-bold" for="phone">New First Name</label>
+              <input name="new_first_name" type="text" id="new_first_name" class="form-control" required>
+            </div>
+            <div class="col-md-4 form-group">
+              <label class="text-black font-weight-bold" for="phone">New Last Name</label>
+              <input name="new_last_name" type="text" id="new_last_name" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label class="text-black font-weight-bold" for="phone">New Customer Address</label>
+              <input name="new_customer_address" type="text" id="new_customer_address" class="form-control ">
+              </select>
+            </div>
+            <div class="col-md-6 form-group">
+              <label class="text-black font-weight-bold" for="phone">New Date of Registration</label>
+              <input name="new_date_of_registration" type="tnew_ext" id="date_of_registration" class="form-control " required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <input name="form11" type="submit" value="Update" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+            </div>
+          </div>
+        </form>
+
+        <form action="#" method="post" class="bg-white p-md-5 p-4 mb-5 border">
+
+          <br>
+          <h3 class="font-weight-bold">Delete Customer</h3>
+          <br>
+
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label class="text-black font-weight-bold" for="phone">Customer ID</label>
+              <input name="customer_id" type="number" id="customer_id" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <input name="form12" type="submit" value="Delete" class="btn btn-primary text-white py-3 px-5 font-weight-bold">
+            </div>
+          </div>
+        </form>     
+    </div>
+  </div>
+
+
+        <br>
+        <br>            
+      </div>
+    </section>
+    <footer class="section footer-section">
+        <div class="container">
+          <div class="row mb-4">
+            <div class="col-md-4 mb-5">
+              <ul class="list-unstyled link">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Terms &amp; Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+               <li><a href="#">Rooms</a></li>
+              </ul>
+            </div>
+            <div class="col-md-4 mb-5">
+              <ul class="list-unstyled link">
+                <li><a href="#">The Rooms</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Restaurant</a></li>
+              </ul>
+            </div>
+            <div class="col-md-4 mb-5 pr-md-5 contact-info">
+              <p><span class="d-block"><span class="ion-ios-location h5 mr-3 text-primary"></span>Address:</span> <span> 75 Laurier Ave E, <br> Ottawa, ON, CANADA</span></p>
+              <p><span class="d-block"><span class="ion-ios-telephone h5 mr-3 text-primary"></span>Phone:</span> <span> (+1) 613 304 1893</span></p>
+              <p><span class="d-block"><span class="ion-ios-email h5 mr-3 text-primary"></span>Email:</span> <span> northernlights@hotel.com</span></p>
+            </div>
+  
+          </div>
+          <div class="row pt-5">
+            <p class="col-md-6 text-left">
+              Created with ❤️ and <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            </p>
+              
+            <p class="col-md-6 text-right social">
+              <a href="#"><span class="fa fa-tripadvisor"></span></a>
+            </p>
+          </div>
+        </div>
+      </footer>
+    
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+    <script src="static/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="static/js/popper.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/owl.carousel.min.js"></script>
+    <script src="static/js/jquery.stellar.min.js"></script>
+    <script src="static/js/jquery.fancybox.min.js"></script>
+    
+    
+    <script src="static/js/aos.js"></script>
+    
+    <script src="static/js/bootstrap-datepicker.js"></script> 
+    <script src="static/js/jquery.timepicker.min.js"></script> 
+
+    
+
+    <script src="static/js/main.js"></script>
+  </body>
+</html>
